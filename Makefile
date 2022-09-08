@@ -1,0 +1,1 @@
+gcc -g LinkedListMain.c -o LinkedListMain
