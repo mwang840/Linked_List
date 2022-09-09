@@ -8,6 +8,8 @@ typedef struct student{
     int expected;
     struct student *prev;
     struct student *next;
+    struct student *head;
+    struct student *tail;
 
 } student_t;
 
@@ -18,4 +20,4 @@ student_t *pop();
 void push(student_t *head, long id);
 int totalStudents(student_t *head);
 int removeLast(student_t *head);
-int removeById();
+int removeById(long id);
