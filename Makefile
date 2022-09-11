@@ -1,1 +1,2 @@
-gcc -g LinkedListMain.c -o LinkedListMain
+slist: LinkedListMain.c
+gcc -o slist 
