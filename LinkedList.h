@@ -19,4 +19,4 @@ void push(student_t *head, long id);
 int totalStudents(student_t *head);
 int removeLast(student_t *head);
 int removeById(long id);
-void addAtEnd(student_t end);
+void addAtEnd(student_t *end);
