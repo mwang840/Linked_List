@@ -14,9 +14,9 @@ typedef struct student{
 char *getStudent(char *first, char *last, long id, char *year, int expected);
 void printListForward(student_t *head);
 void printListBackwards(student_t *tail);
-student_t *pop();
+student_t *pop(student_t *node);
 void push(student_t *head, long id);
 int totalStudents(student_t *head);
 int removeLast(student_t *head);
-int removeById(long id);
-void addAtEnd(student_t *end);
+int removeById(student_t *student, long id);
+void addAtEnd(student_t *head, char *first, char *last, long id, char *year, int expected);
