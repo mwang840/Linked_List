@@ -53,3 +53,19 @@ void push(student_t *head, long id){
         head->prev = newStudent;
     }
 }
+
+char *getStudent(char *first, char *last, long id, char *year, int expected){
+    return 'a';
+}
+
+int removeLast(student_t *tail){
+    return 0;
+}
+
+int removeById(long id){
+    return 0;
+}
+
+void addAtEnd(student_t *end){
+
+}
