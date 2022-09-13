@@ -11,7 +11,7 @@ typedef struct student{
 
 } student_t;
 
-char *getStudent(char *first, char *last, long id, char *year, int expected);
+char getStudent(student_t *student);
 void printListForward(student_t *head);
 void printListBackwards(student_t *tail);
 student_t *pop(student_t *node);
