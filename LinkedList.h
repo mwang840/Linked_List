@@ -10,8 +10,6 @@ typedef struct student{
     struct student *tail;
 
 } student_t;
-
-char getStudent(student_t *student);
 void printListForward(student_t *head);
 void printListBackwards(student_t *tail);
 student_t *pop(student_t *node);
