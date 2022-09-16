@@ -87,11 +87,13 @@ void push(student_t *head, long id){
     }
 }*/
 
+//removes student at the end of the list
 int removeLast(student_t *tail){
     int lastStudentPos = 0;
     return 0;
 }
 
+//removes the node by the students id
 int removeById(student_t *student, long id){
     if(student == NULL){
         return 0;
@@ -105,6 +107,7 @@ int removeById(student_t *student, long id){
     return 0;
 }
 
+//Adds the node at the end of the list
 void addAtEnd(student_t *head, char *first, char *last, long id, char *year, int expected){
     if(head == NULL){
         return;
@@ -116,5 +119,10 @@ void addAtEnd(student_t *head, char *first, char *last, long id, char *year, int
     }
     lastStudent->next = newStudent;
     newStudent->prev = lastStudent;
+    newStudent->firstName = first;
+    newStudent->lastName = last;
+    newStudent->id = id;
+    newStudent->year = year;
+    newStudent->expected = expected;
     newStudent->next = NULL;
 }
