@@ -71,7 +71,7 @@ void push(student_t *head, long id){
 }
 
 //gets the student node and returns the students  first name
-char *getStudent(student_t *student){
+/*char *getStudent(student_t *student){
     char *surName = (char*)malloc(128 * sizeof(char));
     char *frontName = (char*)malloc( 128 * sizeof(char));
     if(student == NULL){
@@ -85,7 +85,7 @@ char *getStudent(student_t *student){
         frontName = student->firstName;
         return surName + frontName;
     }
-}
+}*/
 
 int removeLast(student_t *tail){
     int lastStudentPos = 0;
