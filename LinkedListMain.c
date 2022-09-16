@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "LinkedList.h"
+student_t *head;
+student_t *tail;
 
 int main(){
     char *studentName = (char*)malloc(28 * sizeof(char));
