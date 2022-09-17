@@ -6,8 +6,6 @@ typedef struct student{
     char *year;
     struct student *prev;
     struct student *next;
-    struct student *head;
-    struct student *tail;
 
 } student_t;
 void printListForward(student_t *head);
@@ -16,5 +14,5 @@ long pop(student_t *node);
 void push(student_t *head, long id);
 int totalStudents(student_t *head);
 void delete(student_t *head, char *last);
-void addAtEnd(student_t *head, char *first, char *last, char *year);
+void addAtEnd(student_t *student, char *first, char *last, char *year);
 void clear();
