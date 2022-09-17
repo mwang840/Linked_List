@@ -145,13 +145,14 @@ void delete(student_t *node, char *last){
 
 
 //Adds the node at the end of the list
-void addAtEnd(student_t *head, char *first, char *last, long id, char *year, int expected){
+void addAtEnd(student_t *head, char *first, char *last, char *year){
     if(head == NULL){
         return;
     }
     student_t *newStudent = (student_t*)malloc(sizeof(student_t));
     char *one = (char*)malloc(20 * sizeof(char));
     char *surname = (char*)malloc(20 * sizeof(char));
+    char *aYear = (char*)malloc(20*sizeof(char));
     student_t *lastStudent = head;
     while(lastStudent->next != NULL){
         lastStudent = lastStudent->next;
@@ -159,14 +160,12 @@ void addAtEnd(student_t *head, char *first, char *last, long id, char *year, int
     lastStudent->firstName = one;
     lastStudent->lastName = surname;
     lastStudent->next = newStudent;
+    lastStudent->year = aYear;
     newStudent->prev = lastStudent;
     newStudent->firstName = first;
     newStudent->lastName = last;
-    newStudent->id = id;
-    newStudent->year = year;
-    newStudent->expected = expected;
     newStudent->next = NULL;
-    printf("Student added at end is %s, %s, %s", first, last, year);
+    printf("Student added at end is %s, %s, %s", first, last, aYear);
 }
 
 //Clears the entire list
