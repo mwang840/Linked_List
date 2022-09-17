@@ -64,5 +64,10 @@ int main(){
         printf("You entered the %d out of the range 1-5, please try again\n", input);    
         break;        
     }
+    free(student->firstName);
+    free(oneName);
+    free(student->lastName);
+    free(serName);
+    free(student);
     return 0;
 }
