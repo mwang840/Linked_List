@@ -1,7 +1,4 @@
-slist:  LinkedListMain.c LinkedList.c
-
-run:
-	./slist
-
-make slist:
-	gcc -o slist LinkedListMain.c LinkedList.c -I
+make: slist 
+	gcc LinkedListMain.c -g -o slist 
+clean:
+	rm slist
