@@ -6,13 +6,10 @@ typedef struct student{
     char *year;
     struct student *prev;
     struct student *next;
+    struct student *head;
+    struct student *tail;
 
 } student_t;
-
-student_t *head;
-student_t *tail;
-
-char getStudent(student_t *student);
 void printListForward(student_t *head);
 void printListBackwards(student_t *tail);
 long pop(student_t *node);

@@ -142,8 +142,10 @@ void delete(student_t *node, char *last){
     }*/
 }
 
-//Adds the student at the end of the list
-void addAtEnd(student_t *head, char *first, char *last, char *year){
+
+
+//Adds the node at the end of the list
+void addAtEnd(student_t *head, char *first, char *last, long id, char *year, int expected){
     if(head == NULL){
         return;
     }
@@ -158,6 +160,11 @@ void addAtEnd(student_t *head, char *first, char *last, char *year){
     lastStudent->lastName = surname;
     lastStudent->next = newStudent;
     newStudent->prev = lastStudent;
+    newStudent->firstName = first;
+    newStudent->lastName = last;
+    newStudent->id = id;
+    newStudent->year = year;
+    newStudent->expected = expected;
     newStudent->next = NULL;
     printf("Student added at end is %s, %s, %s", first, last, year);
 }
