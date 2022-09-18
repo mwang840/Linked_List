@@ -146,10 +146,6 @@ void addAtEnd(student_t *student, char *first, char *last, char *year){
         currentStudent->next = student;
         student->prev = currentStudent;
         tail = student;
-        printf("Tail Pointer %p\n", tail);
-        printf("Tail Pointer prev %p\n", tail->prev);
-        printf("Input pointers %p\n", student->next);
-        printf("Input pointer prev %p\n", student->prev);
     }    
 }
 
