@@ -2,46 +2,71 @@
 #include <stdlib.h>
 #include <string.h>
 #include "LinkedList.h"
-student_t *head;
-student_t *tail;
+//Set the global variables head and tail to null initially
+student_t *head = NULL;
+student_t *tail = NULL;
+student_t *currentStudent = NULL;
 
-//Finds the total amount of students starting from the begining of the doubly-linked list
-int totalStudents(student_t *head){
-    int total = 0;
-    while(head != NULL){
-        total++;
-        head = head->next;
-    }
-    return total;
+void getData(student_t *student, char *oneName, char *serName, char *year){
+    long id = 0;
+    int expeceted = 0;
+    printf("Enter a first name\n");
+    scanf("%s", oneName);
+    printf("Enter a last name\n");
+    scanf("%s", serName);
+    printf("Enter your current year\n");
+    scanf("%s", year);
+
+    printf("Enter a student id\n");
+    scanf("%ld", &id);
+
+    printf("Enter graduation date\n");
+    scanf("%d", &expeceted);
+
+    student->firstName = oneName;
+    student->lastName = serName;
+    student->year = year;
+    student->id = id;
+    student->expected = expeceted;
+    addAtEnd(student, oneName, serName, year);
 }
 
 //Prints the students with their graduation, class and expected graduation with the id from the front of the list
-void printListForward(student_t *head){
+void printListForward(){
+    if(currentStudent == NULL) {
+        printf("Empty List\n");
+    }
+    currentStudent = head;
+    printf("Printing out the list of students in order\n");
     if(head == NULL){
+        printf("Error cannot print due to an empty list\n");
         return;
     }
-    student_t *current = head;
-    printf("Printing out the list of students in order\n");
-    while(current != NULL){
-        printf("The students name is %s %s, with an id of %ld, in the class of %s and will be expected to graduate in spring of %d", current->firstName, current->lastName, current->id, current->expected);
-        current = current->next;
+   while(currentStudent->next != NULL){
+        printf("Name: %s %s, Year: %s, Id: %ld, Expected Graduation: %d\n\n\n\n", currentStudent->firstName, currentStudent->lastName, currentStudent->year, currentStudent->id, currentStudent->expected);
+        currentStudent = currentStudent->next;
     }
+    printf("Name: %s %s, Year: %s, Id: %ld, Expected Graduation: %d\n\n\n\n", currentStudent->firstName, currentStudent->lastName, currentStudent->year, currentStudent->id, currentStudent->expected);
+
 }
 
 //Same thing but reverse order
-void printListBackwards(student_t *tail){
+void printListBackwards(){
+    if(currentStudent == NULL){
+        printf("Empty List\n");
+    }
+     currentStudent = tail;
+    printf("Printing out the list of students in reverse order\n");
     if(tail == NULL){
+        printf("Error cannot print due to an empty list\n");
         return;
     }
-    student_t *current = tail;
-    printf("Printing out the list of students in reverse order\n");
-    while(current != NULL){
-        printf("The students name is %s %s\n", current->firstName, current->lastName);
-        printf("Student's id: %ld\n", current->id);
-        printf("%s is in the class of %d\n", current->firstName, current->expected);
-        printf("%s will be expected to graduate in %d\n", current->firstName, current->expected);
-        current = current->prev;
+   while(currentStudent->prev != NULL){
+        printf("Name: %s %s, Year: %s, Id: %ld, Expected Graduation: %d\n\n\n\n", currentStudent->firstName, currentStudent->lastName, currentStudent->year, currentStudent->id, currentStudent->expected);
+        currentStudent = currentStudent->prev;
     }
+    printf("Name: %s %s, Year: %s, Id: %ld, Expected Graduation: %d\n\n\n\n", currentStudent->firstName, currentStudent->lastName, currentStudent->year, currentStudent->id, currentStudent->expected);
+
 }
 
 //pops the first node off the dll, returns the student id of the popped node
@@ -59,113 +84,73 @@ long pop(student_t *node){
 
 }
 
-//pushes the node to the front of the list
-void push(student_t *head, long id){
-    if(head == NULL){
+void delete(char *last){
+    if(currentStudent == NULL) {
+        printf("No list to delete");
         return;
     }
-    student_t *newStudent = (student_t*)malloc(sizeof(student_t));
-    newStudent->id = id;
-    newStudent->prev = NULL;
-    newStudent->next = head;
-}
-
-//gets the student node and returns the students  first name
-/*char *getStudent(student_t *student){
-    char *surName = (char*)malloc(128 * sizeof(char));
-    char *frontName = (char*)malloc( 128 * sizeof(char));
-    if(student == NULL){
-        return NULL;
-    }
-    if(student->firstName == ' ' || student->lastName == ' '){
-        return ' ';
-    }
-    else{
-        surName = student->lastName;
-        frontName = student->firstName;
-        return surName + frontName;
-    }
-}*/
-
-//Deletes the student by last name  take in last name and 
-void delete(student_t *node, char *last){
-    if(node == NULL || last == NULL){
-        return;
-    }
-    student_t *student = (student_t *)malloc(sizeof(student_t));
-    student = node;
-    student_t *temp;
-    if(strcmp(student->lastName, last) ==  0 && (student->prev == NULL && student->next == NULL)){
-        printf("The student that will be deleted is %s", last);
-        free(student);
-    }
-    while(student != NULL){
-        if(strcmp(student->lastName, last) ==  0){
-            if(student == head){
-                temp = student;
-                free(student);
-                temp->prev = NULL;
-            }
-            else if(student != head || student != tail){
-                temp = student;
-                temp->prev = student->prev;
-                temp->next = student->next;
-                free(student);
-            }
-            else if(student == tail){
-                temp = student;
-                temp->prev = student->prev;
-                free(student);
-                temp->next = NULL;
-            }
+    currentStudent = head;
+        printf("Executing the while loop\n");
+        while(currentStudent->next != NULL) {
+        if(*(currentStudent->lastName) == *last) {
+            break;
         }
-        student = student->next;
+        currentStudent = currentStudent->next;
     }
-    /*char buffer[BUFFERSIZE];
-    char *last = (char *)malloc(28 * sizeof(char));
-    char *yearOfGraduation = (char *)malloc(4 * sizeof(char));
-    if(node == NULL){
+    if(*(currentStudent->lastName) != *last) {
         return;
     }
-    student_t *current = node;
-    printf("Enter the first and last name of the student and the year:\n");
-    if(fgets(last, buffer, yearOfGraduation)){
-        printf("The student %s %s who graduates in %s will be deleted", last, yearOfGraduation);
+    if (head == tail) {
+        currentStudent = NULL;
+        return;
     }
-    if(current->next == NULL && current->prev == NULL){
-        free(current);
-        free(last);
-        free()
+    if(currentStudent == head) {
+        printf("Deleting head student\n");
+        currentStudent = currentStudent->next;
+        currentStudent->prev = NULL;
+        head = currentStudent;
+        return;
     }
-    while(current != NULL){
-        
-    }*/
+    if (currentStudent == tail) {
+        printf("Deleting last student\n");
+        currentStudent = currentStudent->prev;
+        currentStudent->next = NULL;
+        tail = currentStudent;
+        return;
+    }
+    student_t *temp = currentStudent->next;
+    currentStudent = currentStudent->prev;
+    currentStudent->next = temp;
+    temp = currentStudent;
+    currentStudent = currentStudent->next;
+    currentStudent->prev = temp;
 }
 
 
 
 //Adds the node at the end of the list
-void addAtEnd(student_t *head, char *first, char *last, char *year){
-    if(head == NULL){
-        return;
+void addAtEnd(student_t *student, char *first, char *last, char *year){
+    student->prev = NULL;
+    student->next = NULL;
+    if(currentStudent == NULL){
+        currentStudent = student;
+        head = student;
+        tail = student;
     }
-    student_t *newStudent = (student_t*)malloc(sizeof(student_t));
-    char *one = (char*)malloc(20 * sizeof(char));
-    char *surname = (char*)malloc(20 * sizeof(char));
-    char *aYear = (char*)malloc(20*sizeof(char));
-    student_t *lastStudent = head;
-    while(lastStudent->next != NULL){
-        lastStudent = lastStudent->next;
-    }
-    lastStudent->firstName = one;
-    lastStudent->lastName = surname;
-    lastStudent->next = newStudent;
-    lastStudent->year = aYear;
-    newStudent->prev = lastStudent;
-    newStudent->firstName = first;
-    newStudent->lastName = last;
-    newStudent->next = NULL;
-    printf("Student added at end is %s, %s, %s", first, last, aYear);
+    else{
+        while(currentStudent->next != NULL) {
+            currentStudent = currentStudent -> next;
+        }
+        
+
+        currentStudent->next = student;
+        student->prev = currentStudent;
+        tail = student;
+        printf("Tail Pointer %p\n", tail);
+        printf("Tail Pointer prev %p\n", tail->prev);
+        printf("Input pointers %p\n", student->next);
+        printf("Input pointer prev %p\n", student->prev);
+    }    
 }
 
 //Clears the entire list
@@ -179,4 +164,5 @@ void clear(){
         free(current);
         current = temp;
     }
+    printf("Done!\n");
 }
